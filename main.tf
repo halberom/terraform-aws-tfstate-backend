@@ -1,11 +1,21 @@
+module "label" {
+  source             = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.5.0"
+  additional_tag_map = "${var.additional_tag_map}"
+  attributes         = "${var.attributes}"
+  context            = "${var.context}"
+  delimiter          = "${var.delimiter}"
+  environment        = "${var.environment}"
+  label_order        = "${var.label_order}"
+  name               = "${var.name}"
+  namespace          = "${var.namespace}"
+  stage              = "${var.stage}"
+  tags               = "${var.tags}"
+}
+
 module "s3_bucket_label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
-  namespace  = "${var.namespace}"
-  stage      = "${var.stage}"
-  name       = "${var.name}"
-  delimiter  = "${var.delimiter}"
-  attributes = "${var.attributes}"
-  tags       = "${var.tags}"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.5.0"
+  attributes = ["state"]
+  context    = "${module.label.context}"
 }
 
 resource "aws_s3_bucket" "default" {
@@ -30,13 +40,9 @@ resource "aws_s3_bucket" "default" {
 }
 
 module "dynamodb_table_label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
-  namespace  = "${var.namespace}"
-  stage      = "${var.stage}"
-  name       = "${var.name}"
-  delimiter  = "${var.delimiter}"
-  attributes = ["${compact(concat(var.attributes, list("lock")))}"]
-  tags       = "${var.tags}"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.5.0"
+  attributes = ["lock"]
+  context    = "${module.label.context}"
 }
 
 resource "aws_dynamodb_table" "with_server_side_encryption" {

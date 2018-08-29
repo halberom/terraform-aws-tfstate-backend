@@ -106,10 +106,13 @@ Available targets:
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | acl | The canned ACL to apply to the S3 bucket | string | `private` | no |
+| additional_tag_map | Additional tags for appending to each tag map | map | `<map>` | no |
 | attributes | Additional attributes (e.g. `state`) | list | `<list>` | no |
+| context | Default context to use for passing state between label invocations | map | `<map>` | no |
 | delimiter | Delimiter to be used between `namespace`, `stage`, `name`, and `attributes` | string | `-` | no |
 | enable_server_side_encryption | Enable DynamoDB server-side encryption | string | `true` | no |
 | force_destroy | A boolean that indicates the S3 bucket can be destroyed even if it contains objects. These objects are not recoverable | string | `false` | no |
+| label_order | The naming order of the id output and Name tag | list | `<list>` | no |
 | name | Name  (e.g. `app` or `cluster`) | string | `terraform` | no |
 | namespace | Namespace (e.g. `cp` or `cloudposse`) | string | - | yes |
 | read_capacity | DynamoDB read capacity units | string | `5` | no |
