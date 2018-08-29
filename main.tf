@@ -1,5 +1,5 @@
 module "label" {
-  source             = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.5.0"
+  source             = "git::https://github.com/halberom/terraform-null-label.git?ref=handle_default"
   additional_tag_map = "${var.additional_tag_map}"
   attributes         = "${var.attributes}"
   context            = "${var.context}"
